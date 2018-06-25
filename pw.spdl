@@ -1,0 +1,59 @@
+/*
+*  Communication protocol between smartphone and web server
+*/
+
+hashfunction hash;
+
+usertype Key;
+usertype Timestamp;
+usertype SmartPhoneData;
+usertype WebServerData;
+usertype Password;
+usertype Identification;
+
+protocol pw(P,W)
+{
+	role P
+	{
+		const PW: Password;
+		const ID: Identification;
+		const kir: Key;
+		fresh T1: Timestamp;
+		fresh T2: Timestamp;
+		fresh PhoneData: SmartPhoneData;
+		var T3: Timestamp;
+		var ServerData: WebServerData;		
+
+		send_1 (P, W, { T1, ID, hash(PW)}pk(W) );
+		send_2 (P, W, { T2, P, PhoneData}kir );
+		recv_3 (W, P, {T3, W, ServerData}kir);
+
+		claim_p1 (P, Secret, PW);
+		claim_p2 (P, Secret, ID);
+		claim_p3 (P, Secret, PhoneData);
+		claim_p4 (P, Secret, ServerData);
+		claim_p5 (P, Secret, kir);
+	}
+
+	role W
+	{
+		const PW: Password;
+		const ID: Identification;
+		const kir: Key;
+		var T1: Timestamp;
+		var T2: Timestamp;
+		var PhoneData: SmartPhoneData;
+		fresh T3: Timestamp;
+		fresh ServerData: WebServerData;
+		
+		recv_1( P, W, { T1, ID, hash(PW)}pk(W) );
+		recv_2 (P, W, { T2, P, PhoneData}kir );
+		send_3 (W, P, {T3, W, ServerData}kir);
+
+		claim_w1 (W, Secret, PW);
+		claim_w2 (W, Secret, ID);
+		claim_w3 (W, Secret, PhoneData);
+		claim_w4 (W, Secret, ServerData);
+		claim_w5 (W, Secret, kir);
+	}
+}
