@@ -33,6 +33,8 @@ protocol pw(P,W)
 		claim_p3 (P, Secret, PhoneData);
 		claim_p4 (P, Secret, ServerData);
 		claim_p5 (P, Secret, kir);
+		claim_p6 (P, Secret, T1);
+		claim_p7 (P, Secret, T2);
 	}
 
 	role W
@@ -55,5 +57,7 @@ protocol pw(P,W)
 		claim_w3 (W, Secret, PhoneData);
 		claim_w4 (W, Secret, ServerData);
 		claim_w5 (W, Secret, kir);
+		claim_p6 (W, Secret, T1);
+		claim_p7 (W, Secret, T2);
 	}
 }

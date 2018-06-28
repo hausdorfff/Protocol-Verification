@@ -30,6 +30,9 @@ protocol pb(P,B)
 		claim_p2 (P, Secret, PhoneData);
 		claim_p3 (P, Secret, BandData);
 		claim_p4 (P, Secret, kir);
+		claim_p5 (P, Secret, T1);
+		claim_p6 (P, Secret, T2);
+		claim_p7 (P, Secret, T3);
 	}
 
 	role B
@@ -50,5 +53,8 @@ protocol pb(P,B)
 		claim_b2 (B, Secret, PhoneData);
 		claim_b3 (B, Secret, BandData);
 		claim_b4 (B, Secret, kir);
+		claim_b5 (B, Secret, T1);
+		claim_b6 (B, Secret, T2);
+		claim_b7 (B, Secret, T3);
 	}
 }
