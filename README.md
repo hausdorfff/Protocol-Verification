@@ -1,4 +1,4 @@
-Scyther is an open source automated tool that demonstrates the security of the pro-tocols used on the Internet and open networks. 
+Scyther is an open source automated tool that demonstrates the security of the protocols used on the Internet and open networks. 
 
 You can download Scyther and get more information here.
 https://www.cs.ox.ac.uk/people/cas.cremers/scyther/
