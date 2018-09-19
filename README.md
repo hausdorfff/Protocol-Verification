@@ -9,10 +9,8 @@ we verify 2 protocols using Scyther.
 ### pw.spdl
 : Scyther code for verification of communication protocol between smart phone and web server.
 
-role P: smart phone
-
-role W: web server
-
++ role P: smart phone
++ role W: web server
 + PW: the user’s password
 + ID: the user’s ID
 + PhoneData: data transmitted from the smartphone to the web server
@@ -22,10 +20,8 @@ role W: web server
 ### pb.spdl
 : Scyther code for verification of connection and communication protocol between smart phone and smart band.
 
-role P: smart phone
-
-role B: smart band
-
++ role P: smart phone
++ role B: smart band
 + PhoneInfo: the smartphone identification information
 + PhoneData: data transmitted from the smartphone to the smart band
 + BandData: data transmitted from the smart band to the smartphone
