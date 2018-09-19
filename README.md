@@ -16,13 +16,16 @@ we verify 2 protocols using Scyther.
 + PhoneData: data transmitted from the smartphone to the web server
 + ServerData: data trans-mitted from the web server to the smartphone
 + kir: a symmetric key exchanged using the station-to-station protocol. 
++ T: Time stamp
 
 ### pb.spdl
 : Scyther code for verification of connection and communication protocol between smart phone and smart band.
 
 + role P: smart phone
 + role B: smart band
-+ PhoneInfo: the smartphone identification information
++ connectionReq: connection request from smart phone to smart band
++ connectionRes: connection response from smart band to smart phone
 + PhoneData: data transmitted from the smartphone to the smart band
 + BandData: data transmitted from the smart band to the smartphone
 + kir: the exchanged symmetric key.
++ T: Time stamp
