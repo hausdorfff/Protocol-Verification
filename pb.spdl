@@ -6,7 +6,8 @@ hashfunction hash;
 
 usertype Key;
 usertype Timestamp;
-usertype PhoneID;
+usertype ConnectionRequest;
+usertype ConnectionResponse;
 usertype SmartPhoneData;
 usertype SmartBandData;
 
@@ -15,46 +16,56 @@ protocol pb(P,B)
 	role P
 	{
 		const kir: Key;
-		const PhoneInfo: PhoneID;
 		fresh T1: Timestamp;
 		fresh T3: Timestamp;
+		fresh connectionReq: ConnectionRequest;		
 		fresh PhoneData: SmartPhoneData;
 		var T2: Timestamp;
+		var T4: Timestamp;
+		var connectionRes: ConnectionResponse;
 		var BandData: SmartBandData;
 
-		send_1 (P, B, { T1, PhoneInfo}kir );
-		recv_2 (B, P, { T2, B, BandData}kir );
-		send_3 (P, B, {T3, P, PhoneData}kir);
+		send_1 (P, B, { T1, connectionReq}kir );
+		recv_2 (B, P, { T2, connectionRes}kir );
+		send_3 (P, B, { T3, P, PhoneData}kir);
+		recv_4 (B, P, { T4, B, BandData}kir );
 
-		claim_p1 (P, Secret, PhoneInfo);
-		claim_p2 (P, Secret, PhoneData);
-		claim_p3 (P, Secret, BandData);
-		claim_p4 (P, Secret, kir);
-		claim_p5 (P, Secret, T1);
-		claim_p6 (P, Secret, T2);
-		claim_p7 (P, Secret, T3);
+		claim_p1 (P, Secret, connectionReq);
+		claim_p2 (P, Secret, connectionRes);
+		claim_p3 (P, Secret, PhoneData);
+		claim_p4 (P, Secret, BandData);
+		claim_p5 (P, Secret, kir);
+		claim_p6 (P, Secret, T1);
+		claim_p7 (P, Secret, T2);
+		claim_p8 (P, Secret, T3);
+		claim_p9 (P, Secret, T4);
 	}
 
 	role B
 	{
 		const kir: Key;
-		const PhoneInfo: PhoneID;
 		var T1: Timestamp;
 		var T3: Timestamp;
+		var connectionReq: ConnectionRequest;
 		var PhoneData: SmartPhoneData;
 		fresh T2: Timestamp;
+		fresh T4: Timestamp;
+		fresh connectionRes: ConnectionResponse;
 		fresh BandData: SmartBandData;
 
-		recv_1( P, B, { T1, PhoneInfo}kir );
-		send_2 (B, P, { T2, B, BandData}kir );
-		recv_3 (P, B, {T3, P, PhoneData}kir);
+		recv_1( P, B, { T1, connectionReq}kir );
+		send_2 (B, P, { T2, connectionRes}kir );
+		recv_3 (P, B, { T3, P, PhoneData}kir);
+		send_4 (B, P, { T4, B, BandData}kir );
 
-		claim_b1 (B, Secret, PhoneInfo);
-		claim_b2 (B, Secret, PhoneData);
-		claim_b3 (B, Secret, BandData);
-		claim_b4 (B, Secret, kir);
-		claim_b5 (B, Secret, T1);
-		claim_b6 (B, Secret, T2);
-		claim_b7 (B, Secret, T3);
+		claim_b1 (B, Secret, connectionReq);
+		claim_b2 (B, Secret, connectionRes);
+		claim_b3 (B, Secret, PhoneData);
+		claim_b4 (B, Secret, BandData);
+		claim_b5 (B, Secret, kir);
+		claim_b6 (B, Secret, T1);
+		claim_b7 (B, Secret, T2);
+		claim_b8 (B, Secret, T3);
+		claim_b9 (B, Secret, T4);
 	}
 }
